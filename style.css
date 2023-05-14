@@ -65,21 +65,47 @@ button {
     margin: 8px;
     background-color: rgb(57, 57, 57);
     color: rgb(234, 234, 234);
+    transition: all 0.25s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(87, 87, 87);
+}
+
+button:active{
+    width: 24.5%;
+    height: 77.5px;
 }
 
 .zeroBtn {
     width: 56%;
 }
 
+.zeroBtn:active {
+    width: 55.5%;
+}
+
 .operation {
     background-color: #3D75C2;
+    transition: all 0.25s;
+}
+
+.operation:hover {
+    background-color: #538dde;
 }
 
 .clear,
 .specialOperation {
     background-color: #C28A3D;
-
+    transition: all 0.25s;
 }
+
+.clear:hover,
+.specialOperation:hover {
+    background-color: #d09c53;
+}
+
 
 footer {
     height: 5vh;
