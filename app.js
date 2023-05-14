@@ -1,65 +1,83 @@
 //BASIC CALCULATOR APP
 
+//WORK TO BE DONE
+
+//BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
+//IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
+//GIVE THE % AND +/- BUTTONS FUNCTIONALITY
+//MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
+
 //all buttons are targets and need event listeners
-//screen has to be targetted and user inputs displayed. 
-//user enters initial numbers
-//numbers are displayed on the screen. 
-//value is stored and stays on the display screen
-//operand is clicked on
-//user enters second value.
-//initial value disappears but the value is remembered. 
-//user clicks equals 
-//calculation computes. 
-
 const buttons = document.querySelectorAll('button');
-    buttons.forEach(function(button) {
-        button.addEventListener('click', function(){
-        //code executed when button is clicked on
-        //you want the number to appear on the screen
-    });
-});
-
-const screenDisplay = document.querySelector('.screen')
-screenDisplay.textContent = 0; // set default to zero
+//screen has to be targetted and user inputs displayed.
+const screenDisplay = document.querySelector('.screen');
 
 let a = []; //first numerical combo, save the numbers in the array, turn array into string 
-
 let b = []; //second numerical combo, save the numbers in the array, turn array into string
+let operator = null; //initial value of null tells the computer that an operator hasn't clicked on and to wait for the user to select one. 
 
-function input1() {
-    let value = button.textContent;
-    a.push(value); //this populated the array, but the numbers are divided by commas. 
-    const input1String = a.join(''); //this turns the numbers array into a string.
-    console.log(input1String);
+buttons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    if (!isNaN(button.textContent)) { //this line is checking if the number pressed is a numerical number and not an operator. 
+      if (operator === null) {
+        input1(button);
+      } else {
+        input2(button);
+      }
+    } else if (button.textContent === '+') {
+      operator = '+';
+    } else if (button.textContent === '-') {
+      operator = '-';
+    } else if (button.textContent === 'x') {
+      operator = '*';
+    } else if (button.textContent === '/') {
+      operator = '/';  
+    } else if (button.textContent === 'C') { // to clear, you need all of the following code. 
+        a = []; //this resets array to empty
+        b = []; //this reset array to empty
+        operator = null;
+        screenDisplay.textContent = 0;
+    } else if (button.textContent === '=') {
+      compute();
+    }
+  });
+});
+
+function input1(button) {
+  let value = button.textContent; //
+  a.push(value); //this populates the first array of numbers
+  const input1String = a.join(''); //this turns the array of numbers into a string byt removing the commas
+  screenDisplay.textContent = input1String; //this display the new string of numbers
 }
 
-function input2() {
-    let value = button.textContent;
-    b.push(value); //this populated the array, but the numbers are divided by commas. 
-    const input2String = b.join(''); //this turns the numbers array into a string.
-    console.log(input2String);
+function input2(button) {
+  let value = button.textContent;
+  b.push(value); //this populates the first array of numbers
+  const input2String = b.join(''); //this turns the array of numbers into a string byt removing the commas
+  screenDisplay.textContent = input2String; //this display the new string of numbers
 }
 
-function add(a, b) {
-    return (input1() + input2());
+function compute() {
+  let result;
+  const num1 = parseFloat(a.join('')); //this converts the string back to a number
+  const num2 = parseFloat(b.join('')); //this concerts the string back to a number
+  
+  if (operator === '+') {
+    result = num1 + num2;
+  } else if (operator === '-') {
+    result = num1 - num2;
+  } else if (operator === '*') {
+    result = num1 * num2;
+  } else if (operator === '/') {
+    result = num1 / num2;
+  }
+  
+  screenDisplay.textContent = result;
+  a = [];
+  b = [];
+  operator = null;
 }
-add();
 
-function subtract(a, b) {
-   return a - b;
-}
-subtract();
-
-function multiply(a, b) {
-    return a * b;
-}
-multiply();
-
-function divide(a, b) {
-    return a / b;
-}
-
-divide();
 
 
 
