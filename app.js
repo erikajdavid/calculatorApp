@@ -4,7 +4,7 @@
 
 //BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
 //IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
-//GIVE THE %, +/- and . BUTTONS FUNCTIONALITY
+//GIVE THE % and +/- BUTTONS FUNCTIONALITY
 //MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
 
 //all buttons are targets and need event listeners
@@ -14,7 +14,7 @@ const screenDisplay = document.querySelector('.screen');
 
 let a = []; //first numerical combo, save the numbers in the array, turn array into string 
 let b = []; //second numerical combo, save the numbers in the array, turn array into string
-let operator = null; //initial value of null tells the computer that an operator hasn't clicked on and to wait for the user to select one. 
+let operator = null; //initial value of null tells the computer that an operator hasn't been clicked on and to wait for the user to select one. 
 
 buttons.forEach(function(button) {
   button.addEventListener('click', function() {
@@ -32,26 +32,52 @@ buttons.forEach(function(button) {
       operator = '*';
     } else if (button.textContent === '/') {
       operator = '/';  
+    } else if (button.textContent === '=') {
+        compute();
     } else if (button.textContent === 'C') { // to clear, you need all of the following code. 
         a = []; //this resets array to empty
         b = []; //this reset array to empty
         operator = null;
         screenDisplay.textContent = 0;
-    } else if (button.textContent === '=') {
-      compute();
+    } else if (button.textContent === '.') { //this code is for the decimal
+      if (operator === null) {
+        if (!a.includes('.')) {
+          input1(button);
+        }
+      } else {
+        if (!b.includes('.')) {
+          input2(button);
+        }
+      }
     }
   });
 });
 
 function input1(button) {
-  let value = button.textContent; //
+  let value = button.textContent; 
+  if (operator !== null) {
+    operator = null;
+    a = [];
+    screenDisplay.textContent = '';
+  }
+  if (value === "." & a.includes('.')) {
+    return;
+  }
   a.push(value); //this populates the first array of numbers
   const input1String = a.join(''); //this turns the array of numbers into a string byt removing the commas
   screenDisplay.textContent = input1String; //this display the new string of numbers
 }
 
 function input2(button) {
+  if (operator !== null) {
+    operator = null;
+    b = [];
+    screenDisplay.textContent = '';
+  }
   let value = button.textContent;
+  if (value === "." & b.includes('.')) {
+    return;
+  }
   b.push(value); //this populates the first array of numbers
   const input2String = b.join(''); //this turns the array of numbers into a string byt removing the commas
   screenDisplay.textContent = input2String; //this display the new string of numbers
@@ -70,7 +96,7 @@ function compute() {
     result = num1 * num2;
   } else if (operator === '/') {
     result = num1 / num2;
-  }
+  } 
   
   screenDisplay.textContent = result;
   a = [];
