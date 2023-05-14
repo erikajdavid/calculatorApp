@@ -12,7 +12,7 @@
 //calculation computes. 
 
 const buttons = document.querySelectorAll('button');
-    buttons.forEach(function(button){
+    buttons.forEach(function(button) {
         button.addEventListener('click', function(){
         //code executed when button is clicked on
         //you want the number to appear on the screen
@@ -20,73 +20,53 @@ const buttons = document.querySelectorAll('button');
 });
 
 const screenDisplay = document.querySelector('.screen')
-screenDisplay.textContent = '0'; // set default to zero
+screenDisplay.textContent = 0; // set default to zero
 
+let a = []; //first numerical combo, save the numbers in the array, turn array into string 
 
+let b = []; //second numerical combo, save the numbers in the array, turn array into string
 
-
-
-
-
-
-/*
-//target screen and save in a variable
-//when a user clicks on a number, you want it to display on the screen
-const screenDisplay = document.querySelector('.screen') 
-//when the user clicks on any button, you want it to appear on the screen or perform an operation. 
-//target button and save in a variable. 
-const buttons = document.querySelectorAll('button');
-//use the forEach() method
-//add the eventListener to each button
-buttons.forEach(button => button.addEventListener('click', () => calculate(button)));
-
-//you want to save the numbers the user clicks on in an array
-let calculation = [];
-let accumulativeCalculation;
-
-//create function to calculate 
-function calculate(button) {
-    const value = button.textContent;
-    if (value === 'C') {
-        calculation = [];
-        screenDisplay.textContent = '0';
-    } else if (value === '&#61;') {
-        screenDisplay.textContent = eval(accumulativeCalculation);
-    } else {
-        calculation.push(value); //this will save the numbers the user clicks on in the calculation array
-        //in the console, you'll see that the numbers are seperated by commas, and you don't want that. you want to turn it into a string.
-    
-        accumulativeCalculation = calculation.join(''); //this is now a string
-        //you cannot use the toString() method on an array, it will display the numbers seperated by a comma. 
-        //join('') in this case will join all of the numbers in the array into a string with no commas. 
-        console.log(accumulativeCalculation);
-    
-        screenDisplay.textContent = accumulativeCalculation; // this will display the number array you converted into a string on the screen.  
-    }
-};
-
-//target clear button and save in a variable.
-const clear = document.querySelector('.clear');
-//add event listener
-clear.addEventListener('click', clearDisplay) 
-
-//function to clear screen
-//currently, this function clears to zero BUT, when you press on a number, it adds to the number that was previous deleted. 
-function clearDisplay() {
-    screenDisplay.textContent = 0;
-};
-
-//target negative button and save in a variable.
-//this currently isn't working the way you want it to. 
-const negative = document.querySelector('.negative');
-//add event listener
-negative.addEventListener('click', makeItNegative);
-
-//function to turn number negative
-function makeItNegative() {
-    const negativeSymbol = '-';
-    screenDisplay.textContent = negativeSymbol.join(screenDisplay.textConent);
+function input1() {
+    let value = button.textContent;
+    a.push(value); //this populated the array, but the numbers are divided by commas. 
+    const input1String = a.join(''); //this turns the numbers array into a string.
+    console.log(input1String);
 }
-*/
+
+function input2() {
+    let value = button.textContent;
+    b.push(value); //this populated the array, but the numbers are divided by commas. 
+    const input2String = b.join(''); //this turns the numbers array into a string.
+    console.log(input2String);
+}
+
+function add(a, b) {
+    return (input1() + input2());
+}
+add();
+
+function subtract(a, b) {
+   return a - b;
+}
+subtract();
+
+function multiply(a, b) {
+    return a * b;
+}
+multiply();
+
+function divide(a, b) {
+    return a / b;
+}
+
+divide();
+
+
+
+
+
+
+
+
 
 
