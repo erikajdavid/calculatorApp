@@ -4,7 +4,7 @@
 
 //BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
 //IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
-//GIVE +/- and . BUTTONS FUNCTIONALITY
+//GIVE . BUTTON FUNCTIONALITY
 //MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
 
 //all buttons are targets and need event listeners
@@ -45,6 +45,9 @@ buttons.forEach(function(button) {
 
 function input1(button) {
   let value = button.textContent; 
+  if (value === ".") {
+    a.push('.');
+  }
   if (value === "." & a.includes('.')) {
     return;
   }
@@ -55,6 +58,9 @@ function input1(button) {
 
 function input2(button) {
   let value = button.textContent;
+  if (value === ".") {
+    b.push('.');
+  }
   if (value === "." & b.includes('.')) {
     return;
   }
@@ -91,18 +97,6 @@ percentage.addEventListener('click', getPercentage);
 function getPercentage() {
   let currentValue = parseFloat(screenDisplay.textContent);
   let newValue = currentValue / 100;
-  screenDisplay.textContent = newValue;
-}
-
-//this makes the current value on screen negative
-//this only kind works. when you compute, the negative symbol is discarded, and the result is positive. 
-//FIX THIS
-const negative = document.querySelector('#negative')
-negative.addEventListener('click', makeItNegative);
-
-function makeItNegative() {
-  let currentValue = parseFloat(screenDisplay.textContent);
-  let newValue = -1 * currentValue;
   screenDisplay.textContent = newValue;
 }
 
