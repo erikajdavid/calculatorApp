@@ -4,7 +4,7 @@
 
 //BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
 //IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
-//GIVE THE % and +/- BUTTONS FUNCTIONALITY
+//GIVE +/- and . BUTTONS FUNCTIONALITY
 //MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
 
 //all buttons are targets and need event listeners
@@ -39,27 +39,12 @@ buttons.forEach(function(button) {
         b = []; //this reset array to empty
         operator = null;
         screenDisplay.textContent = 0;
-    } else if (button.textContent === '.') { //this code is for the decimal
-      if (operator === null) {
-        if (!a.includes('.')) {
-          input1(button);
-        }
-      } else {
-        if (!b.includes('.')) {
-          input2(button);
-        }
-      }
-    }
+    } 
   });
 });
 
 function input1(button) {
   let value = button.textContent; 
-  if (operator !== null) {
-    operator = null;
-    a = [];
-    screenDisplay.textContent = '';
-  }
   if (value === "." & a.includes('.')) {
     return;
   }
@@ -69,11 +54,6 @@ function input1(button) {
 }
 
 function input2(button) {
-  if (operator !== null) {
-    operator = null;
-    b = [];
-    screenDisplay.textContent = '';
-  }
   let value = button.textContent;
   if (value === "." & b.includes('.')) {
     return;
@@ -103,6 +83,29 @@ function compute() {
   b = [];
   operator = null;
 }
+
+//this gives the % button functionality
+const percentage = document.querySelector('#percentage')
+percentage.addEventListener('click', getPercentage);
+
+function getPercentage() {
+  let currentValue = parseFloat(screenDisplay.textContent);
+  let newValue = currentValue / 100;
+  screenDisplay.textContent = newValue;
+}
+
+//this makes the current value on screen negative
+//this only kind works. when you compute, the negative symbol is discarded, and the result is positive. 
+//FIX THIS
+const negative = document.querySelector('#negative')
+negative.addEventListener('click', makeItNegative);
+
+function makeItNegative() {
+  let currentValue = parseFloat(screenDisplay.textContent);
+  let newValue = -1 * currentValue;
+  screenDisplay.textContent = newValue;
+}
+
 
 
 
