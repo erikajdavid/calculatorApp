@@ -1,10 +1,8 @@
 //BASIC CALCULATOR APP
 
 //WORK TO BE DONE
-
 //BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
 //IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
-//GIVE . BUTTON FUNCTIONALITY
 //MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
 
 //all buttons are targets and need event listeners
@@ -34,22 +32,35 @@ buttons.forEach(function(button) {
       operator = '/';  
     } else if (button.textContent === '=') {
         compute();
-    } else if (button.textContent === 'C') { // to clear, you need all of the following code. 
+    } else if (button.textContent === 'AC') { // to clear, you need all of the following code. 
         a = []; //this resets array to empty
         b = []; //this reset array to empty
         operator = null;
         screenDisplay.textContent = 0;
-    } 
+    } else if (button.textContent === ".") {
+      // Add decimal point
+      if (operator === null) {
+        if (!a.includes('.')) {
+          a.push('.');
+          screenDisplay.textContent = a.join('');
+        }
+      } else {
+        if (!b.includes('.')) {
+          b.push('.');
+          screenDisplay.textContent = b.join('');
+        }
+      }
+    }
   });
 });
 
 function input1(button) {
   let value = button.textContent; 
   if (value === ".") {
-    a.push('.');
+    a.push('.'); //this is to add the decimal
   }
-  if (value === "." & a.includes('.')) {
-    return;
+  if (value === "." && a.includes('.')) {
+    return; //this is to prevent more than one decimal
   }
   a.push(value); //this populates the first array of numbers
   const input1String = a.join(''); //this turns the array of numbers into a string byt removing the commas
@@ -59,10 +70,10 @@ function input1(button) {
 function input2(button) {
   let value = button.textContent;
   if (value === ".") {
-    b.push('.');
+    b.push('.'); //this is to add the decimal
   }
-  if (value === "." & b.includes('.')) {
-    return;
+  if (value === "." && b.includes('.')) {
+    return; //this is to prevent more than one decimal
   }
   b.push(value); //this populates the first array of numbers
   const input2String = b.join(''); //this turns the array of numbers into a string byt removing the commas
@@ -83,7 +94,15 @@ function compute() {
   } else if (operator === '/') {
     result = num1 / num2;
   } 
-  
+
+  if (!num2 || !num2 && operator) { // only num1 is set or num1 and operator are set 
+    //set the screen to 0
+    screenDisplay.textContent = 0;
+    a = [];
+    operator = null;
+    return;
+  }
+
   screenDisplay.textContent = result;
   a = [];
   b = [];
