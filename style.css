@@ -78,11 +78,13 @@ button:active{
     height: 77.5px;
 }
 
-.zeroBtn {
+.zeroBtn,
+.clear {
     width: 56%;
 }
 
-.zeroBtn:active {
+.zeroBtn:active,
+.clear:active {
     width: 55.5%;
 }
 
@@ -94,7 +96,6 @@ button:active{
 .operation:hover {
     background-color: #538dde;
 }
-
 .clear,
 .specialOperation {
     background-color: #C28A3D;
