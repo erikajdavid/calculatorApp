@@ -1,7 +1,7 @@
 //BASIC CALCULATOR APP
 
 //WORK TO BE DONE
-//BE ABLE TO COMPUTE MORE THAN TWO NUMERICAL VALUES
+//multiple inputs work, but you need to press the equals button first before adding onto the computation. 
 //IF OPERATOR IS SELECTED FIRST, DISCARD IT. 
 //MAKE SURE THAT THE NUMBERS DON'T OVERFLOW-X FROM THE SCREEN. MAYBE USE toFixed()???
 
@@ -63,7 +63,7 @@ function input1(button) {
     return; //this is to prevent more than one decimal
   }
   a.push(value); //this populates the first array of numbers
-  const input1String = a.join(''); //this turns the array of numbers into a string byt removing the commas
+  const input1String = a.join('').slice(0, 10); //this turns the array of numbers into a string byt removing the commas, and limits the digits displayed to 10. 
   screenDisplay.textContent = input1String; //this display the new string of numbers
 }
 
@@ -76,7 +76,7 @@ function input2(button) {
     return; //this is to prevent more than one decimal
   }
   b.push(value); //this populates the first array of numbers
-  const input2String = b.join(''); //this turns the array of numbers into a string byt removing the commas
+  const input2String = b.join('').slice(0, 10);; //this turns the array of numbers into a string byt removing the commas, and limits the digits displayed to 10. 
   screenDisplay.textContent = input2String; //this display the new string of numbers
 }
 
@@ -104,7 +104,7 @@ function compute() {
   }
 
   screenDisplay.textContent = result;
-  a = [];
+  a = [result.toString()]; // Store result as the first input for next calculation
   b = [];
   operator = null;
 }
